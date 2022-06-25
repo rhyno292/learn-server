@@ -48,3 +48,57 @@
     - so, when userC edit, the file not written <br>
 
 ![image](https://user-images.githubusercontent.com/100080625/175769443-774379a1-28d6-453a-9c9d-ad36b1a674f4.png)
+
+### 4. Upload a file to VPN
+
+- Config SSH <br>
+    <code> cd /eth/ssh </code> <br>
+    <code> sudo vi ssh_config </code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175781005-52fb5d0a-95d7-41e2-9fc3-e5c58c9b1367.png)
+
+
+- Connect to Server <br>
+  <code>ssh intern-2022</code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175782200-74e4763e-cde1-41f8-9297-a0a3051dc5d1.png)
+
+- Start Upload
+  <code> scp longdang_upload.txt intern-2022:/home/ubuntu/k10/ </code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175781812-9ad19b9f-cc31-4dc8-954e-186c6bb3ed47.png)
+
+### 5. Download a file from Server z
+
+  <code> scp intern-2022:/home/ubuntu/k10/download-test.txt down-from-vpn.txt </code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175781828-5e0167d4-0d55-4d05-9f32-5bdd38eaeb61.png)
+  result <br>
+![image](https://user-images.githubusercontent.com/100080625/175782302-d7d2ea71-21c6-449e-837b-8a2471eec7b6.png)
+
+
+### 6. Config SSH to transfer file with no password
+- Create SSH key <br>
+  <code>ssh-keygen -t rsa</code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175782796-0ccf3542-1f45-4ee9-9705-584d99d124be.png)
+
+
+- Add public key to Server <br>
+
+ <code>ssh-copy-id -i /home/long/.ssh/id_rsa.pub ubuntu@54.255.142.20</code> <br>
+
+![image](https://user-images.githubusercontent.com/100080625/175782824-d2b26c6c-7658-409b-96a3-74d309d6723d.png)
+
+
+- Private key at client <br>
+  
+  <code>Go to SSH config and add</code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175782974-504f9ab6-5de1-43b0-8bc3-c77091ee9436.png)
+
+
+- Connect without password <br>
+  <code>ssh intern-2022 </code> <br>
+![image](https://user-images.githubusercontent.com/100080625/175783017-41578501-e8f2-4b81-96d6-1a61dcaa06d0.png)
+
+
+- Upload file without password of VPN <br>
+
+![image](https://user-images.githubusercontent.com/100080625/175783203-e801a218-d595-48e1-b67d-7e3d9cd9d0b9.png)
+
+
