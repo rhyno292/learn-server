@@ -52,3 +52,43 @@
       docker-compose up
   ##### Result
 ![image](https://user-images.githubusercontent.com/100080625/176817300-e027c00c-8103-494d-99f8-04b89128bcc2.png)
+
+
+#### 5. Create service MailHog
+  ##### Edit docker-compose.yml
+![image](https://user-images.githubusercontent.com/100080625/176994021-a24dcd3f-3d13-4744-9a61-c4f502ccadc3.png)
+
+  ##### Edit PHP_CUSTOM.dockerfile
+      RUN apt-get update &&\
+          apt-get install --no-install-recommends --assume-yes --quiet ca-certificates curl git &&\
+          rm -rf /var/lib/apt/lists/*
+      RUN curl -Lsf 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C '/usr/local' -xvzf -
+      ENV PATH /usr/local/go/bin:$PATH
+      RUN go get github.com/mailhog/mhsendmail
+      RUN cp /root/go/bin/mhsendmail /usr/bin/mhsendmail
+      RUN echo 'sendmail_path = /usr/bin/mhsendmail --smtp-addr mailhog:1025' > /usr/local/etc/php/php.ini
+![image](https://user-images.githubusercontent.com/100080625/176994054-3e9ef061-0081-48a9-b393-3ca6a3898907.png)
+
+  ##### Create function to Send Mail
+![image](https://user-images.githubusercontent.com/100080625/176994083-67d02d04-8119-4201-9cc4-4b851599ddb9.png)
+
+  ##### Create form to enter mail
+![image](https://user-images.githubusercontent.com/100080625/176994102-da906b72-697b-4626-a50b-18394cf819c8.png)
+
+  ##### Create actionForm.php to handle sendmail 
+![image](https://user-images.githubusercontent.com/100080625/176994467-9d9a5125-727d-4a76-9ae3-65177e3a4519.png)
+
+  ##### Restart docker-compose up
+      docker-compose build --no-cache
+      docker-compose up -d
+
+  ##### Demo
+      Input a email and click Send
+![image](https://user-images.githubusercontent.com/100080625/176994421-47d713b1-205d-498a-a938-4db8c612eab6.png)
+
+  ##### Result
+![image](https://user-images.githubusercontent.com/100080625/176994517-c0f85683-4932-4e2b-9054-35a87abcfcfe.png)
+![image](https://user-images.githubusercontent.com/100080625/176994535-71cd1626-d07a-4a7e-bf26-f39bbc562c78.png)
+![image](https://user-images.githubusercontent.com/100080625/176994538-b2870744-5dbc-4821-9aba-7bb58187b9c5.png)
+
+
